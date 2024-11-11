@@ -16,4 +16,12 @@ final class StringManipulationTests: XCTestCase {
 		let expectedNoSpacesSearchText = "porcupine,lion,horse,dog"
 		XCTAssertEqual(searchText.removeSpaces(), expectedNoSpacesSearchText, "Strings do not match.")
 	}
+	
+	func testConvertingDateString_WhenReceivedUnformattedStringFromServer_FormatSuccessfully() {
+		let unformattedDate = "2024-11-06T05:06:53Z"
+		let formattedDate = unformattedDate.formatDateString()
+		let expectedFormattedDate = "Wednesday, Nov 6, 2024"
+		
+		XCTAssertEqual(formattedDate, expectedFormattedDate, "Formatted date doesn't match expected format.")
+	}
 }
