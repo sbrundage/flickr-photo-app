@@ -10,6 +10,8 @@ import Foundation
 final class FlickrViewModel: ObservableObject {
 	
 	@Published var searchResults: [FlickrResult] = []
+	
+	private let networkManager = NetworkManager()
 		
 	func mockSearchTextUpdated(searchText: String) {
 		DispatchQueue.main.async {
@@ -32,6 +34,17 @@ final class FlickrViewModel: ObservableObject {
 	}
 	
 	func searchForPhotos(withSearchString searchString: String) {
-		
+		networkManager.fetchPhotosForSearch(searchText: searchString) { [weak self] result in
+			guard let self else { return }
+			switch result {
+			case .success(let photoResults):
+				DispatchQueue.main.async { [weak self] in
+					guard let self else { return }
+					searchResults = photoResults
+				}
+			case .failure(let error):
+				print("Error fetching photos: \(error)")
+			}
+		}
 	}
 }

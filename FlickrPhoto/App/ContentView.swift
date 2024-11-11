@@ -27,12 +27,9 @@ struct ContentView: View {
 			}
 			.navigationTitle("Flickr")
 			.onChange(of: searchText) { _, newValue in
-				viewModel.mockSearchTextUpdated(searchText: newValue)
+				viewModel.searchForPhotos(withSearchString: newValue)
 			}
 		} //: NavigationStack
-		.onAppear {
-			viewModel.mockSearchTextUpdated(searchText: "")
-		}
 		.padding(.horizontal)
 	}
 }
