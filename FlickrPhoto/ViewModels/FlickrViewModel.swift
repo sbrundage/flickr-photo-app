@@ -35,6 +35,8 @@ final class FlickrViewModel: ObservableObject {
 	}
 	
 	func searchForPhotos(withSearchString searchString: String) {
+		networkStatus = .loading
+		
 		networkManager.fetchPhotosForSearch(searchText: searchString) { [weak self] result in
 			guard let self else { return }
 			
