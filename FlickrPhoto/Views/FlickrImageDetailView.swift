@@ -20,7 +20,7 @@ struct FlickrImageDetailView: View {
 					height: 300
 				)
 				
-				Text(flickrImage.title)
+				Text(flickrImage.title ?? "NA")
 					.font(.title)
 					.padding(.vertical, 24)
 				

@@ -21,7 +21,21 @@ struct ContentView: View {
 				SearchBar(searchText: $searchText, gridColumn: $gridColumn)
 					.padding(.vertical, 12)
 				
-				GalleryGridView(gridColumn: $gridColumn, photos: $viewModel.searchResults)
+				switch viewModel.networkStatus {
+					case .loading:
+						VStack {
+							Spacer()
+							ProgressView()
+								.tint(.accent)
+						}
+					case .loaded:
+						GalleryGridView(gridColumn: $gridColumn, photos: $viewModel.searchResults)
+					case .error(let description):
+						VStack {
+							Spacer()
+							Text("Error during networking request: \(description)")
+						}
+				}
 				
 				Spacer()
 			}
