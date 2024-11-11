@@ -35,25 +35,19 @@ struct GalleryGridView: View {
 	// MARK: - Body
 	
 	var body: some View {
-		// TODO: Is this necessary?
 		ScrollView(.vertical, showsIndicators: false) {
 			
 			// MARK: - Dynamic Photo Grid
 			
 			LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
 				ForEach(photos) { photo in
-//					NavigationLink(destination: FlickrImageDetailView(flickrImage: photo)) {
-//						PhotoResultView(
-//							photoUrl: photo.media?.m,
-//							width: 150,
-//							height: 150
-//						)
-//					}
-					PhotoResultView(
-						photoUrl: photo.media?.m,
-						width: 150,
-						height: 150
-					)
+					NavigationLink(destination: FlickrImageDetailView(flickrImage: photo)) {
+						PhotoResultView(
+							photoUrl: photo.media?.m,
+							width: 150,
+							height: 150
+						)
+					}
 					
 				} //: ForEach
 			} //: LazyVGrid
