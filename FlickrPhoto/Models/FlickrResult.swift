@@ -9,7 +9,7 @@ import Foundation
 
 struct FlickrResult: Identifiable {
 	let id: String
-	let title: String
+	let title: String?
 	let link: String?
 	let media: ResultMedia?
 	let dateTaken: String?
@@ -19,11 +19,11 @@ struct FlickrResult: Identifiable {
 	
 	init?(searchResult: SearchResult) {
 		guard
-			let title = searchResult.title
+			let link = searchResult.link
 		else { return nil }
 		
-		self.id = title
-		self.title = title
+		self.id = link
+		self.title = searchResult.title
 		self.link = searchResult.link
 		self.media = searchResult.media
 		self.dateTaken = searchResult.dateTaken

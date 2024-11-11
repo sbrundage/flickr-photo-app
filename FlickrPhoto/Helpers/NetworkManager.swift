@@ -18,7 +18,7 @@ class NetworkManager {
 		dataTask?.cancel()
 		
 		guard let request = createUrlRequest(forUrl: entireUrl) else {
-			completion(.failure(.invalidUrl))
+			completion(.failure(.invalidUrl(entireUrl)))
 			return
 		}
 		
@@ -27,7 +27,8 @@ class NetworkManager {
 				let data = data,
 				error == nil
 			else {
-				completion(.failure(.networkResponseError(error!)))
+				let resp = response as? HTTPURLResponse
+				completion(.failure(.networkResponseError(error, resp?.statusCode)))
 				return
 			}
 			
